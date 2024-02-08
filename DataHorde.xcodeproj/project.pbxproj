@@ -1,0 +1,622 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		56A458D32B7469FB00D3D8CA /* DataHordeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A458D22B7469FB00D3D8CA /* DataHordeApp.swift */; };
+		56A458D52B7469FB00D3D8CA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A458D42B7469FB00D3D8CA /* ContentView.swift */; };
+		56A458D72B7469FC00D3D8CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56A458D62B7469FC00D3D8CA /* Assets.xcassets */; };
+		56A458DA2B7469FC00D3D8CA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56A458D92B7469FC00D3D8CA /* Preview Assets.xcassets */; };
+		56A458DC2B7469FC00D3D8CA /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A458DB2B7469FC00D3D8CA /* Persistence.swift */; };
+		56A458DF2B7469FC00D3D8CA /* DataHorde.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 56A458DD2B7469FC00D3D8CA /* DataHorde.xcdatamodeld */; };
+		56A458EB2B7469FC00D3D8CA /* DataHordeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A458EA2B7469FC00D3D8CA /* DataHordeTests.swift */; };
+		56A458F52B7469FC00D3D8CA /* DataHordeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A458F42B7469FC00D3D8CA /* DataHordeUITests.swift */; };
+		56A458F72B7469FC00D3D8CA /* DataHordeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A458F62B7469FC00D3D8CA /* DataHordeUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		56A458E72B7469FC00D3D8CA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 56A458C72B7469FB00D3D8CA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 56A458CE2B7469FB00D3D8CA;
+			remoteInfo = DataHorde;
+		};
+		56A458F12B7469FC00D3D8CA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 56A458C72B7469FB00D3D8CA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 56A458CE2B7469FB00D3D8CA;
+			remoteInfo = DataHorde;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		56A458CF2B7469FB00D3D8CA /* DataHorde.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DataHorde.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		56A458D22B7469FB00D3D8CA /* DataHordeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHordeApp.swift; sourceTree = "<group>"; };
+		56A458D42B7469FB00D3D8CA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		56A458D62B7469FC00D3D8CA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		56A458D92B7469FC00D3D8CA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		56A458DB2B7469FC00D3D8CA /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		56A458DE2B7469FC00D3D8CA /* DataHorde.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataHorde.xcdatamodel; sourceTree = "<group>"; };
+		56A458E02B7469FC00D3D8CA /* DataHorde.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DataHorde.entitlements; sourceTree = "<group>"; };
+		56A458E12B7469FC00D3D8CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		56A458E62B7469FC00D3D8CA /* DataHordeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DataHordeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		56A458EA2B7469FC00D3D8CA /* DataHordeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHordeTests.swift; sourceTree = "<group>"; };
+		56A458F02B7469FC00D3D8CA /* DataHordeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DataHordeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		56A458F42B7469FC00D3D8CA /* DataHordeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHordeUITests.swift; sourceTree = "<group>"; };
+		56A458F62B7469FC00D3D8CA /* DataHordeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHordeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		56A458CC2B7469FB00D3D8CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		56A458E32B7469FC00D3D8CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		56A458ED2B7469FC00D3D8CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		56A458C62B7469FB00D3D8CA = {
+			isa = PBXGroup;
+			children = (
+				56A458D12B7469FB00D3D8CA /* DataHorde */,
+				56A458E92B7469FC00D3D8CA /* DataHordeTests */,
+				56A458F32B7469FC00D3D8CA /* DataHordeUITests */,
+				56A458D02B7469FB00D3D8CA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		56A458D02B7469FB00D3D8CA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				56A458CF2B7469FB00D3D8CA /* DataHorde.app */,
+				56A458E62B7469FC00D3D8CA /* DataHordeTests.xctest */,
+				56A458F02B7469FC00D3D8CA /* DataHordeUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		56A458D12B7469FB00D3D8CA /* DataHorde */ = {
+			isa = PBXGroup;
+			children = (
+				56A458D22B7469FB00D3D8CA /* DataHordeApp.swift */,
+				56A458D42B7469FB00D3D8CA /* ContentView.swift */,
+				56A458D62B7469FC00D3D8CA /* Assets.xcassets */,
+				56A458DB2B7469FC00D3D8CA /* Persistence.swift */,
+				56A458E02B7469FC00D3D8CA /* DataHorde.entitlements */,
+				56A458E12B7469FC00D3D8CA /* Info.plist */,
+				56A458DD2B7469FC00D3D8CA /* DataHorde.xcdatamodeld */,
+				56A458D82B7469FC00D3D8CA /* Preview Content */,
+			);
+			path = DataHorde;
+			sourceTree = "<group>";
+		};
+		56A458D82B7469FC00D3D8CA /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				56A458D92B7469FC00D3D8CA /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		56A458E92B7469FC00D3D8CA /* DataHordeTests */ = {
+			isa = PBXGroup;
+			children = (
+				56A458EA2B7469FC00D3D8CA /* DataHordeTests.swift */,
+			);
+			path = DataHordeTests;
+			sourceTree = "<group>";
+		};
+		56A458F32B7469FC00D3D8CA /* DataHordeUITests */ = {
+			isa = PBXGroup;
+			children = (
+				56A458F42B7469FC00D3D8CA /* DataHordeUITests.swift */,
+				56A458F62B7469FC00D3D8CA /* DataHordeUITestsLaunchTests.swift */,
+			);
+			path = DataHordeUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		56A458CE2B7469FB00D3D8CA /* DataHorde */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 56A458FA2B7469FC00D3D8CA /* Build configuration list for PBXNativeTarget "DataHorde" */;
+			buildPhases = (
+				56A458CB2B7469FB00D3D8CA /* Sources */,
+				56A458CC2B7469FB00D3D8CA /* Frameworks */,
+				56A458CD2B7469FB00D3D8CA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DataHorde;
+			productName = DataHorde;
+			productReference = 56A458CF2B7469FB00D3D8CA /* DataHorde.app */;
+			productType = "com.apple.product-type.application";
+		};
+		56A458E52B7469FC00D3D8CA /* DataHordeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 56A458FD2B7469FC00D3D8CA /* Build configuration list for PBXNativeTarget "DataHordeTests" */;
+			buildPhases = (
+				56A458E22B7469FC00D3D8CA /* Sources */,
+				56A458E32B7469FC00D3D8CA /* Frameworks */,
+				56A458E42B7469FC00D3D8CA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				56A458E82B7469FC00D3D8CA /* PBXTargetDependency */,
+			);
+			name = DataHordeTests;
+			productName = DataHordeTests;
+			productReference = 56A458E62B7469FC00D3D8CA /* DataHordeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		56A458EF2B7469FC00D3D8CA /* DataHordeUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 56A459002B7469FC00D3D8CA /* Build configuration list for PBXNativeTarget "DataHordeUITests" */;
+			buildPhases = (
+				56A458EC2B7469FC00D3D8CA /* Sources */,
+				56A458ED2B7469FC00D3D8CA /* Frameworks */,
+				56A458EE2B7469FC00D3D8CA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				56A458F22B7469FC00D3D8CA /* PBXTargetDependency */,
+			);
+			name = DataHordeUITests;
+			productName = DataHordeUITests;
+			productReference = 56A458F02B7469FC00D3D8CA /* DataHordeUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		56A458C72B7469FB00D3D8CA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1520;
+				LastUpgradeCheck = 1520;
+				TargetAttributes = {
+					56A458CE2B7469FB00D3D8CA = {
+						CreatedOnToolsVersion = 15.2;
+					};
+					56A458E52B7469FC00D3D8CA = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = 56A458CE2B7469FB00D3D8CA;
+					};
+					56A458EF2B7469FC00D3D8CA = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = 56A458CE2B7469FB00D3D8CA;
+					};
+				};
+			};
+			buildConfigurationList = 56A458CA2B7469FB00D3D8CA /* Build configuration list for PBXProject "DataHorde" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 56A458C62B7469FB00D3D8CA;
+			productRefGroup = 56A458D02B7469FB00D3D8CA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				56A458CE2B7469FB00D3D8CA /* DataHorde */,
+				56A458E52B7469FC00D3D8CA /* DataHordeTests */,
+				56A458EF2B7469FC00D3D8CA /* DataHordeUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		56A458CD2B7469FB00D3D8CA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				56A458DA2B7469FC00D3D8CA /* Preview Assets.xcassets in Resources */,
+				56A458D72B7469FC00D3D8CA /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		56A458E42B7469FC00D3D8CA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		56A458EE2B7469FC00D3D8CA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		56A458CB2B7469FB00D3D8CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				56A458DC2B7469FC00D3D8CA /* Persistence.swift in Sources */,
+				56A458D52B7469FB00D3D8CA /* ContentView.swift in Sources */,
+				56A458DF2B7469FC00D3D8CA /* DataHorde.xcdatamodeld in Sources */,
+				56A458D32B7469FB00D3D8CA /* DataHordeApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		56A458E22B7469FC00D3D8CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				56A458EB2B7469FC00D3D8CA /* DataHordeTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		56A458EC2B7469FC00D3D8CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				56A458F52B7469FC00D3D8CA /* DataHordeUITests.swift in Sources */,
+				56A458F72B7469FC00D3D8CA /* DataHordeUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		56A458E82B7469FC00D3D8CA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 56A458CE2B7469FB00D3D8CA /* DataHorde */;
+			targetProxy = 56A458E72B7469FC00D3D8CA /* PBXContainerItemProxy */;
+		};
+		56A458F22B7469FC00D3D8CA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 56A458CE2B7469FB00D3D8CA /* DataHorde */;
+			targetProxy = 56A458F12B7469FC00D3D8CA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		56A458F82B7469FC00D3D8CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		56A458F92B7469FC00D3D8CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		56A458FB2B7469FC00D3D8CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = DataHorde/DataHorde.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"DataHorde/Preview Content\"";
+				DEVELOPMENT_TEAM = 52UN9P9E5H;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DataHorde/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jlongstudios.DataHorde;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		56A458FC2B7469FC00D3D8CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = DataHorde/DataHorde.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"DataHorde/Preview Content\"";
+				DEVELOPMENT_TEAM = 52UN9P9E5H;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DataHorde/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jlongstudios.DataHorde;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		56A458FE2B7469FC00D3D8CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 52UN9P9E5H;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jlongstudios.DataHordeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DataHorde.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DataHorde";
+			};
+			name = Debug;
+		};
+		56A458FF2B7469FC00D3D8CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 52UN9P9E5H;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jlongstudios.DataHordeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DataHorde.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DataHorde";
+			};
+			name = Release;
+		};
+		56A459012B7469FC00D3D8CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 52UN9P9E5H;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jlongstudios.DataHordeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = DataHorde;
+			};
+			name = Debug;
+		};
+		56A459022B7469FC00D3D8CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 52UN9P9E5H;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jlongstudios.DataHordeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = DataHorde;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		56A458CA2B7469FB00D3D8CA /* Build configuration list for PBXProject "DataHorde" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				56A458F82B7469FC00D3D8CA /* Debug */,
+				56A458F92B7469FC00D3D8CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		56A458FA2B7469FC00D3D8CA /* Build configuration list for PBXNativeTarget "DataHorde" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				56A458FB2B7469FC00D3D8CA /* Debug */,
+				56A458FC2B7469FC00D3D8CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		56A458FD2B7469FC00D3D8CA /* Build configuration list for PBXNativeTarget "DataHordeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				56A458FE2B7469FC00D3D8CA /* Debug */,
+				56A458FF2B7469FC00D3D8CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		56A459002B7469FC00D3D8CA /* Build configuration list for PBXNativeTarget "DataHordeUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				56A459012B7469FC00D3D8CA /* Debug */,
+				56A459022B7469FC00D3D8CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		56A458DD2B7469FC00D3D8CA /* DataHorde.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				56A458DE2B7469FC00D3D8CA /* DataHorde.xcdatamodel */,
+			);
+			currentVersion = 56A458DE2B7469FC00D3D8CA /* DataHorde.xcdatamodel */;
+			path = DataHorde.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 56A458C72B7469FB00D3D8CA /* Project object */;
+}
