@@ -3,12 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		56A458D32B7469FB00D3D8CA /* DataHordeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A458D22B7469FB00D3D8CA /* DataHordeApp.swift */; };
-		56A458D52B7469FB00D3D8CA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A458D42B7469FB00D3D8CA /* ContentView.swift */; };
 		56A458D72B7469FC00D3D8CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56A458D62B7469FC00D3D8CA /* Assets.xcassets */; };
 		56A458DA2B7469FC00D3D8CA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56A458D92B7469FC00D3D8CA /* Preview Assets.xcassets */; };
 		56A458DC2B7469FC00D3D8CA /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A458DB2B7469FC00D3D8CA /* Persistence.swift */; };
@@ -16,6 +15,13 @@
 		56A458EB2B7469FC00D3D8CA /* DataHordeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A458EA2B7469FC00D3D8CA /* DataHordeTests.swift */; };
 		56A458F52B7469FC00D3D8CA /* DataHordeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A458F42B7469FC00D3D8CA /* DataHordeUITests.swift */; };
 		56A458F72B7469FC00D3D8CA /* DataHordeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A458F62B7469FC00D3D8CA /* DataHordeUITestsLaunchTests.swift */; };
+		56A459052B746A7600D3D8CA /* PoCampo in Frameworks */ = {isa = PBXBuildFile; productRef = 56A459042B746A7600D3D8CA /* PoCampo */; };
+		56A459082B746B7D00D3D8CA /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 56A459072B746B7D00D3D8CA /* ComposableArchitecture */; };
+		56A4590B2B746DE100D3D8CA /* CounterFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A4590A2B746DE100D3D8CA /* CounterFeature.swift */; };
+		56A4590E2B74719400D3D8CA /* ValueRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A4590D2B74719400D3D8CA /* ValueRepresentable.swift */; };
+		56A459112B7471D700D3D8CA /* TrackedItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A459102B7471D700D3D8CA /* TrackedItemModel.swift */; };
+		56A459132B747B6000D3D8CA /* TrackedValueModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A459122B747B6000D3D8CA /* TrackedValueModel.swift */; };
+		56A459152B747BC600D3D8CA /* Countable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A459142B747BC600D3D8CA /* Countable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +44,6 @@
 /* Begin PBXFileReference section */
 		56A458CF2B7469FB00D3D8CA /* DataHorde.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DataHorde.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56A458D22B7469FB00D3D8CA /* DataHordeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHordeApp.swift; sourceTree = "<group>"; };
-		56A458D42B7469FB00D3D8CA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		56A458D62B7469FC00D3D8CA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		56A458D92B7469FC00D3D8CA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		56A458DB2B7469FC00D3D8CA /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -50,6 +55,11 @@
 		56A458F02B7469FC00D3D8CA /* DataHordeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DataHordeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		56A458F42B7469FC00D3D8CA /* DataHordeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHordeUITests.swift; sourceTree = "<group>"; };
 		56A458F62B7469FC00D3D8CA /* DataHordeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHordeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		56A4590A2B746DE100D3D8CA /* CounterFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterFeature.swift; sourceTree = "<group>"; };
+		56A4590D2B74719400D3D8CA /* ValueRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueRepresentable.swift; sourceTree = "<group>"; };
+		56A459102B7471D700D3D8CA /* TrackedItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedItemModel.swift; sourceTree = "<group>"; };
+		56A459122B747B6000D3D8CA /* TrackedValueModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedValueModel.swift; sourceTree = "<group>"; };
+		56A459142B747BC600D3D8CA /* Countable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Countable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +67,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56A459082B746B7D00D3D8CA /* ComposableArchitecture in Frameworks */,
+				56A459052B746A7600D3D8CA /* PoCampo in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,8 +112,10 @@
 		56A458D12B7469FB00D3D8CA /* DataHorde */ = {
 			isa = PBXGroup;
 			children = (
+				56A4590F2B7471B000D3D8CA /* Models */,
+				56A4590C2B74717400D3D8CA /* Utilities */,
+				56A459092B746BBD00D3D8CA /* Features */,
 				56A458D22B7469FB00D3D8CA /* DataHordeApp.swift */,
-				56A458D42B7469FB00D3D8CA /* ContentView.swift */,
 				56A458D62B7469FC00D3D8CA /* Assets.xcassets */,
 				56A458DB2B7469FC00D3D8CA /* Persistence.swift */,
 				56A458E02B7469FC00D3D8CA /* DataHorde.entitlements */,
@@ -137,6 +151,32 @@
 			path = DataHordeUITests;
 			sourceTree = "<group>";
 		};
+		56A459092B746BBD00D3D8CA /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				56A4590A2B746DE100D3D8CA /* CounterFeature.swift */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		56A4590C2B74717400D3D8CA /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				56A4590D2B74719400D3D8CA /* ValueRepresentable.swift */,
+				56A459142B747BC600D3D8CA /* Countable.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		56A4590F2B7471B000D3D8CA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				56A459102B7471D700D3D8CA /* TrackedItemModel.swift */,
+				56A459122B747B6000D3D8CA /* TrackedValueModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -153,6 +193,10 @@
 			dependencies = (
 			);
 			name = DataHorde;
+			packageProductDependencies = (
+				56A459042B746A7600D3D8CA /* PoCampo */,
+				56A459072B746B7D00D3D8CA /* ComposableArchitecture */,
+			);
 			productName = DataHorde;
 			productReference = 56A458CF2B7469FB00D3D8CA /* DataHorde.app */;
 			productType = "com.apple.product-type.application";
@@ -225,6 +269,10 @@
 				Base,
 			);
 			mainGroup = 56A458C62B7469FB00D3D8CA;
+			packageReferences = (
+				56A459032B746A7600D3D8CA /* XCLocalSwiftPackageReference "../PoCampo" */,
+				56A459062B746B7D00D3D8CA /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+			);
 			productRefGroup = 56A458D02B7469FB00D3D8CA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -268,9 +316,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				56A458DC2B7469FC00D3D8CA /* Persistence.swift in Sources */,
-				56A458D52B7469FB00D3D8CA /* ContentView.swift in Sources */,
 				56A458DF2B7469FC00D3D8CA /* DataHorde.xcdatamodeld in Sources */,
+				56A4590B2B746DE100D3D8CA /* CounterFeature.swift in Sources */,
+				56A459112B7471D700D3D8CA /* TrackedItemModel.swift in Sources */,
 				56A458D32B7469FB00D3D8CA /* DataHordeApp.swift in Sources */,
+				56A459132B747B6000D3D8CA /* TrackedValueModel.swift in Sources */,
+				56A4590E2B74719400D3D8CA /* ValueRepresentable.swift in Sources */,
+				56A459152B747BC600D3D8CA /* Countable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -604,6 +656,36 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		56A459032B746A7600D3D8CA /* XCLocalSwiftPackageReference "../PoCampo" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../PoCampo;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		56A459062B746B7D00D3D8CA /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture.git";
+			requirement = {
+				branch = "observation-beta";
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		56A459042B746A7600D3D8CA /* PoCampo */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PoCampo;
+		};
+		56A459072B746B7D00D3D8CA /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 56A459062B746B7D00D3D8CA /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		56A458DD2B7469FC00D3D8CA /* DataHorde.xcdatamodeld */ = {
