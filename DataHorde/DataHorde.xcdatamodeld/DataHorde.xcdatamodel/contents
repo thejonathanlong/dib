@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="23B92" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="23D56" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="TrackedItem" representedClassName="TrackedItem" syncable="YES" codeGenerationType="class">
+        <attribute name="colorName" optional="YES" attributeType="String"/>
         <attribute name="id" attributeType="String" defaultValueString=""/>
         <attribute name="name" attributeType="String" defaultValueString=""/>
+        <attribute name="widgetId" optional="YES" attributeType="String"/>
         <relationship name="values" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TrackedValue" inverseName="item" inverseEntity="TrackedValue"/>
+        <relationship name="widget" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Widget" inverseName="trackedItem" inverseEntity="Widget"/>
     </entity>
     <entity name="TrackedValue" representedClassName="TrackedValue" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="type" optional="YES" attributeType="String"/>
         <attribute name="value" optional="YES" attributeType="Binary"/>
         <relationship name="item" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TrackedItem" inverseName="values" inverseEntity="TrackedItem"/>
+    </entity>
+    <entity name="Widget" representedClassName="Widget" syncable="YES" codeGenerationType="class">
+        <attribute name="decrementValue" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="incrementValue" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <relationship name="trackedItem" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="TrackedItem" inverseName="widget" inverseEntity="TrackedItem"/>
     </entity>
 </model>

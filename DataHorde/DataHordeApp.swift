@@ -13,7 +13,22 @@ struct DataHordeApp: App {
 
     var body: some Scene {
         WindowGroup {
-            EmptyView()
+            ItemFeatureView()
         }
+    }
+}
+
+struct TestCountable: Countable {
+    let value: Int
+    var display: String {
+        String(value)
+    }
+
+    mutating func increment() -> TestCountable {
+        TestCountable(value: value + 1)
+    }
+    
+    mutating func decrement() -> TestCountable {
+        TestCountable(value: value - 1)
     }
 }

@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		560F2C062B892A2C0015DEFC /* CounterWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560F2C052B892A2C0015DEFC /* CounterWidget.swift */; };
+		560F2C092B892F8F0015DEFC /* ItemsListFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560F2C082B892F8F0015DEFC /* ItemsListFeature.swift */; };
+		560F2C0B2B892F9A0015DEFC /* ItemsListFeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560F2C0A2B892F9A0015DEFC /* ItemsListFeatureView.swift */; };
+		560F2C0E2B89300B0015DEFC /* TrackedItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560F2C0D2B89300B0015DEFC /* TrackedItemView.swift */; };
+		560F2C112B89389E0015DEFC /* ItemFeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560F2C102B89389E0015DEFC /* ItemFeatureView.swift */; };
+		560F2C132B893C430015DEFC /* ItemFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560F2C122B893C430015DEFC /* ItemFeature.swift */; };
+		560F2C152B8953CC0015DEFC /* WidgetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560F2C142B8953CC0015DEFC /* WidgetModel.swift */; };
+		560F2C172B8988D90015DEFC /* CounterFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560F2C162B8988D90015DEFC /* CounterFeature.swift */; };
+		560F2C1A2B8A32060015DEFC /* AsyncDataStoreDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560F2C192B8A32060015DEFC /* AsyncDataStoreDependencies.swift */; };
 		56A458D32B7469FB00D3D8CA /* DataHordeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A458D22B7469FB00D3D8CA /* DataHordeApp.swift */; };
 		56A458D72B7469FC00D3D8CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56A458D62B7469FC00D3D8CA /* Assets.xcassets */; };
 		56A458DA2B7469FC00D3D8CA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56A458D92B7469FC00D3D8CA /* Preview Assets.xcassets */; };
@@ -17,7 +26,6 @@
 		56A458F72B7469FC00D3D8CA /* DataHordeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A458F62B7469FC00D3D8CA /* DataHordeUITestsLaunchTests.swift */; };
 		56A459052B746A7600D3D8CA /* PoCampo in Frameworks */ = {isa = PBXBuildFile; productRef = 56A459042B746A7600D3D8CA /* PoCampo */; };
 		56A459082B746B7D00D3D8CA /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 56A459072B746B7D00D3D8CA /* ComposableArchitecture */; };
-		56A4590B2B746DE100D3D8CA /* CounterFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A4590A2B746DE100D3D8CA /* CounterFeature.swift */; };
 		56A4590E2B74719400D3D8CA /* ValueRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A4590D2B74719400D3D8CA /* ValueRepresentable.swift */; };
 		56A459112B7471D700D3D8CA /* TrackedItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A459102B7471D700D3D8CA /* TrackedItemModel.swift */; };
 		56A459132B747B6000D3D8CA /* TrackedValueModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A459122B747B6000D3D8CA /* TrackedValueModel.swift */; };
@@ -42,6 +50,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		560F2C052B892A2C0015DEFC /* CounterWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterWidget.swift; sourceTree = "<group>"; };
+		560F2C082B892F8F0015DEFC /* ItemsListFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsListFeature.swift; sourceTree = "<group>"; };
+		560F2C0A2B892F9A0015DEFC /* ItemsListFeatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsListFeatureView.swift; sourceTree = "<group>"; };
+		560F2C0D2B89300B0015DEFC /* TrackedItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedItemView.swift; sourceTree = "<group>"; };
+		560F2C102B89389E0015DEFC /* ItemFeatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemFeatureView.swift; sourceTree = "<group>"; };
+		560F2C122B893C430015DEFC /* ItemFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemFeature.swift; sourceTree = "<group>"; };
+		560F2C142B8953CC0015DEFC /* WidgetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetModel.swift; sourceTree = "<group>"; };
+		560F2C162B8988D90015DEFC /* CounterFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterFeature.swift; sourceTree = "<group>"; };
+		560F2C192B8A32060015DEFC /* AsyncDataStoreDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncDataStoreDependencies.swift; sourceTree = "<group>"; };
 		56A458CF2B7469FB00D3D8CA /* DataHorde.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DataHorde.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56A458D22B7469FB00D3D8CA /* DataHordeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHordeApp.swift; sourceTree = "<group>"; };
 		56A458D62B7469FC00D3D8CA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -55,7 +72,6 @@
 		56A458F02B7469FC00D3D8CA /* DataHordeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DataHordeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		56A458F42B7469FC00D3D8CA /* DataHordeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHordeUITests.swift; sourceTree = "<group>"; };
 		56A458F62B7469FC00D3D8CA /* DataHordeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHordeUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		56A4590A2B746DE100D3D8CA /* CounterFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterFeature.swift; sourceTree = "<group>"; };
 		56A4590D2B74719400D3D8CA /* ValueRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueRepresentable.swift; sourceTree = "<group>"; };
 		56A459102B7471D700D3D8CA /* TrackedItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedItemModel.swift; sourceTree = "<group>"; };
 		56A459122B747B6000D3D8CA /* TrackedValueModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedValueModel.swift; sourceTree = "<group>"; };
@@ -89,6 +105,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		560F2C072B892F770015DEFC /* Widgets */ = {
+			isa = PBXGroup;
+			children = (
+				560F2C162B8988D90015DEFC /* CounterFeature.swift */,
+				560F2C052B892A2C0015DEFC /* CounterWidget.swift */,
+			);
+			path = Widgets;
+			sourceTree = "<group>";
+		};
+		560F2C0C2B8930000015DEFC /* ItemsListFeature */ = {
+			isa = PBXGroup;
+			children = (
+				560F2C082B892F8F0015DEFC /* ItemsListFeature.swift */,
+				560F2C0A2B892F9A0015DEFC /* ItemsListFeatureView.swift */,
+				560F2C0D2B89300B0015DEFC /* TrackedItemView.swift */,
+			);
+			path = ItemsListFeature;
+			sourceTree = "<group>";
+		};
+		560F2C0F2B8938900015DEFC /* ItemFeature */ = {
+			isa = PBXGroup;
+			children = (
+				560F2C102B89389E0015DEFC /* ItemFeatureView.swift */,
+				560F2C122B893C430015DEFC /* ItemFeature.swift */,
+			);
+			path = ItemFeature;
+			sourceTree = "<group>";
+		};
+		560F2C182B8A31F00015DEFC /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				560F2C192B8A32060015DEFC /* AsyncDataStoreDependencies.swift */,
+			);
+			path = Dependencies;
+			sourceTree = "<group>";
+		};
 		56A458C62B7469FB00D3D8CA = {
 			isa = PBXGroup;
 			children = (
@@ -112,6 +164,7 @@
 		56A458D12B7469FB00D3D8CA /* DataHorde */ = {
 			isa = PBXGroup;
 			children = (
+				560F2C182B8A31F00015DEFC /* Dependencies */,
 				56A4590F2B7471B000D3D8CA /* Models */,
 				56A4590C2B74717400D3D8CA /* Utilities */,
 				56A459092B746BBD00D3D8CA /* Features */,
@@ -154,7 +207,9 @@
 		56A459092B746BBD00D3D8CA /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				56A4590A2B746DE100D3D8CA /* CounterFeature.swift */,
+				560F2C0F2B8938900015DEFC /* ItemFeature */,
+				560F2C072B892F770015DEFC /* Widgets */,
+				560F2C0C2B8930000015DEFC /* ItemsListFeature */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -173,6 +228,7 @@
 			children = (
 				56A459102B7471D700D3D8CA /* TrackedItemModel.swift */,
 				56A459122B747B6000D3D8CA /* TrackedValueModel.swift */,
+				560F2C142B8953CC0015DEFC /* WidgetModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -317,11 +373,19 @@
 			files = (
 				56A458DC2B7469FC00D3D8CA /* Persistence.swift in Sources */,
 				56A458DF2B7469FC00D3D8CA /* DataHorde.xcdatamodeld in Sources */,
-				56A4590B2B746DE100D3D8CA /* CounterFeature.swift in Sources */,
 				56A459112B7471D700D3D8CA /* TrackedItemModel.swift in Sources */,
+				560F2C172B8988D90015DEFC /* CounterFeature.swift in Sources */,
+				560F2C0E2B89300B0015DEFC /* TrackedItemView.swift in Sources */,
 				56A458D32B7469FB00D3D8CA /* DataHordeApp.swift in Sources */,
+				560F2C092B892F8F0015DEFC /* ItemsListFeature.swift in Sources */,
 				56A459132B747B6000D3D8CA /* TrackedValueModel.swift in Sources */,
+				560F2C062B892A2C0015DEFC /* CounterWidget.swift in Sources */,
+				560F2C132B893C430015DEFC /* ItemFeature.swift in Sources */,
+				560F2C112B89389E0015DEFC /* ItemFeatureView.swift in Sources */,
 				56A4590E2B74719400D3D8CA /* ValueRepresentable.swift in Sources */,
+				560F2C152B8953CC0015DEFC /* WidgetModel.swift in Sources */,
+				560F2C0B2B892F9A0015DEFC /* ItemsListFeatureView.swift in Sources */,
+				560F2C1A2B8A32060015DEFC /* AsyncDataStoreDependencies.swift in Sources */,
 				56A459152B747BC600D3D8CA /* Countable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

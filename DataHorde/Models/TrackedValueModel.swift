@@ -8,10 +8,10 @@
 import Foundation
 import PoCampo
 
-struct TrackedValueModel: AsyncDataStorableModel {
+struct TrackedValueModel: AsyncDataStorableModel, Equatable {
     typealias ManagedObject = TrackedValue
 
-    enum TrackedValueType {
+    enum TrackedValueType: Equatable {
         struct Constants {
             static let int = "int"
         }
@@ -46,6 +46,20 @@ struct TrackedValueModel: AsyncDataStorableModel {
                 return String(value).data(using: .utf8) ?? Data()
             }
         }
+
+        var currentValue: String {
+            switch self {
+                case .int(let value):
+                    return String(value)
+            }
+        }
+
+        var defaultValue: String {
+            switch self {
+                case .int:
+                    return String(0)
+            }
+        }
     }
 
     var uniqueId: String = "ProbablyNeedAnIdProperty"
@@ -54,6 +68,14 @@ struct TrackedValueModel: AsyncDataStorableModel {
 
     let date: Date
 
+    var currentValue: String {
+        type.currentValue
+    }
+
+    var defaultValue: String {
+        type.defaultValue
+    }
+
     static var entityName: String {
         "TrackedValue"
     }
@@ -61,6 +83,11 @@ struct TrackedValueModel: AsyncDataStorableModel {
     init(object: TrackedValue) {
         self.type = .init(rawValue: object.type, data: object.value) ?? .int(value: 0)
         self.date = object.date ?? Date()
+    }
+
+    init(type: TrackedValueType) {
+        self.type = type
+        self.date = Date()
     }
 
     static func update(managedObject: TrackedValue, with model: TrackedValueModel) {
