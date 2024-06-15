@@ -8,26 +8,42 @@
 import Foundation
 import PoCampo
 
-struct TrackedValueModel: AsyncDataStorableModel {
-    typealias ManagedObject = TrackedValue
+extension DBValue: UniqueManagedObject { }
 
-    enum TrackedValueType {
+struct Book: Codable, Equatable, CustomStringConvertible {
+    let title: String?
+    let author: String?
+
+    var description: String {
+        guard let title, let author else { return "" }
+        return title + " by " + author
+    }
+}
+
+struct TrackedValueModel: AsyncDataStorableModel, Equatable {
+    typealias ManagedObject = DBValue
+
+    enum TrackedValueType: Equatable {
         struct Constants {
-            static let int = "int"
+            static let double = "double"
+            static let text = "text"
+            static let book = "book"
         }
 
-        case int(value: Int)
+        case number(value: Double)
+        case text(value: String)
+        case book(value: Book)
 
         init?(rawValue: String?, data: Data?) {
             switch rawValue?.lowercased() {
-            case Constants.int:
-                let value: Int
+            case Constants.double:
+                let value: Double
                 if let data, let string = String(data: data, encoding: .utf8) {
-                    value = Int(string) ?? 0
+                    value = Double(string) ?? 0
                 } else {
                     value = 0
                 }
-                self = .int(value: value)
+                self = .number(value: value)
             default:
                 return nil
             }
@@ -35,15 +51,66 @@ struct TrackedValueModel: AsyncDataStorableModel {
 
         var rawValue: String {
             switch self {
-            case .int:
-                return Constants.int
+            case .number:
+                return Constants.double
+            case .text:
+                return Constants.text
+            case .book:
+                return Constants.book
             }
         }
 
         var rawData: Data {
             switch self {
-            case let .int(value: value):
+            case let .number(value: value):
                 return String(value).data(using: .utf8) ?? Data()
+            case let .text(value: value):
+                return value.data(using: .utf8) ?? Data()
+            case let .book(value: value):
+                let encoder = JSONEncoder()
+                return (try? encoder.encode(value)) ?? Data()
+            }
+        }
+
+        var value: String {
+            switch self {
+            case .number(let value):
+                return String(value)
+            case .text(value: let value):
+                return value
+            case .book(value: let value):
+                return value.description
+            }
+        }
+
+        var defaultValue: String {
+            switch self {
+            case .number:
+                return String(0)
+            case .text:
+                return ""
+            case .book:
+                return ""
+            }
+        }
+
+        var isNumber: Bool {
+            switch self {
+            case .number:
+                return true
+            case .text, .book:
+                return false
+            }
+        }
+
+        var numberValue: Double? {
+            switch self {
+            case .number(let value):
+                return value
+            case .text:
+                return nil
+            case .book:
+                return nil
             }
         }
     }
@@ -54,18 +121,32 @@ struct TrackedValueModel: AsyncDataStorableModel {
 
     let date: Date
 
-    static var entityName: String {
-        "TrackedValue"
+    var value: String {
+        type.value
     }
 
-    init(object: TrackedValue) {
-        self.type = .init(rawValue: object.type, data: object.value) ?? .int(value: 0)
+    var defaultValue: String {
+        type.defaultValue
+    }
+
+    static var entityName: String {
+        "DBTrackedValue"
+    }
+
+    init(object: ManagedObject) {
+        self.type = .init(rawValue: object.type, data: object.value) ?? .number(value: 0)
         self.date = object.date ?? Date()
     }
 
-    static func update(managedObject: TrackedValue, with model: TrackedValueModel) {
+    init(type: TrackedValueType, date: Date = Date()) {
+        self.type = type
+        self.date = date
+    }
+
+    static func update(managedObject: ManagedObject, with model: TrackedValueModel) {
         managedObject.type = model.type.rawValue
         managedObject.value = model.type.rawData
         managedObject.date = model.date
     }
 }
+

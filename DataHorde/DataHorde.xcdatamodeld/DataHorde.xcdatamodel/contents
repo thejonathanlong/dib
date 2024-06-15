@@ -1,14 +1,47 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="23B92" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
-    <entity name="TrackedItem" representedClassName="TrackedItem" syncable="YES" codeGenerationType="class">
-        <attribute name="id" attributeType="String" defaultValueString=""/>
-        <attribute name="name" attributeType="String" defaultValueString=""/>
-        <relationship name="values" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TrackedValue" inverseName="item" inverseEntity="TrackedValue"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22758" systemVersion="23F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="DBBookCounterWidget" representedClassName="DBBookCounterWidget" syncable="YES" codeGenerationType="class">
+        <attribute name="author" optional="YES" attributeType="String"/>
+        <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="hasMarkedAsFinished" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="uniqueId" optional="YES" attributeType="String"/>
+        <relationship name="widget" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DBWidget" inverseName="bookCounterWidget" inverseEntity="DBWidget"/>
     </entity>
-    <entity name="TrackedValue" representedClassName="TrackedValue" syncable="YES" codeGenerationType="class">
+    <entity name="DBCounterWidget" representedClassName="DBCounterWidget" syncable="YES" codeGenerationType="class">
+        <attribute name="decrementAmount" optional="YES" attributeType="Double" defaultValueString="1" usesScalarValueType="YES"/>
+        <attribute name="incrementAmount" optional="YES" attributeType="Double" defaultValueString="1" usesScalarValueType="YES"/>
+        <attribute name="measurement" optional="YES" attributeType="String"/>
+        <attribute name="uniqueId" optional="YES" attributeType="String"/>
+        <attribute name="value" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="widget" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DBWidget" inverseName="counterWidget" inverseEntity="DBWidget"/>
+    </entity>
+    <entity name="DBTextOnlyWidget" representedClassName="DBTextOnlyWidget" syncable="YES" codeGenerationType="class">
+        <attribute name="uniqueId" optional="YES" attributeType="String"/>
+        <attribute name="value" optional="YES" attributeType="String"/>
+        <relationship name="widget" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DBWidget" inverseName="textOnlyWidget" inverseEntity="DBWidget"/>
+    </entity>
+    <entity name="DBTrackedItem" representedClassName="DBTrackedItem" syncable="YES" codeGenerationType="class">
+        <attribute name="hexColor" optional="YES" attributeType="String"/>
+        <attribute name="name" attributeType="String" defaultValueString=""/>
+        <attribute name="uniqueId" attributeType="String" defaultValueString=""/>
+        <relationship name="values" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DBValue" inverseName="item" inverseEntity="DBValue"/>
+        <relationship name="widget" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="DBWidget" inverseName="item" inverseEntity="DBWidget"/>
+    </entity>
+    <entity name="DBValue" representedClassName="DBValue" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="type" optional="YES" attributeType="String"/>
+        <attribute name="uniqueId" optional="YES" attributeType="String"/>
         <attribute name="value" optional="YES" attributeType="Binary"/>
-        <relationship name="item" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TrackedItem" inverseName="values" inverseEntity="TrackedItem"/>
+        <relationship name="item" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DBTrackedItem" inverseName="values" inverseEntity="DBTrackedItem"/>
+    </entity>
+    <entity name="DBWidget" representedClassName="DBWidget" syncable="YES" codeGenerationType="class">
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <attribute name="uniqueId" optional="YES" attributeType="String"/>
+        <relationship name="bookCounterWidget" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DBBookCounterWidget" inverseName="widget" inverseEntity="DBBookCounterWidget"/>
+        <relationship name="counterWidget" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DBCounterWidget" inverseName="widget" inverseEntity="DBCounterWidget"/>
+        <relationship name="item" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DBTrackedItem" inverseName="widget" inverseEntity="DBTrackedItem"/>
+        <relationship name="textOnlyWidget" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DBTextOnlyWidget" inverseName="widget" inverseEntity="DBTextOnlyWidget"/>
     </entity>
 </model>

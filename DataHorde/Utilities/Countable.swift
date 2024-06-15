@@ -13,4 +13,6 @@ protocol Countable: Equatable {
     mutating func increment() -> Self
 
     mutating func decrement() -> Self
+
+    func trackedValue() -> TrackedValueModel
 }

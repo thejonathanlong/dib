@@ -13,7 +13,30 @@ struct DataHordeApp: App {
 
     var body: some Scene {
         WindowGroup {
-            EmptyView()
+            ItemsListFeatureView(store: .init(initialState: .init(items: [TrackedItemModel]()), reducer: {
+                ItemsListFeature()
+            }))
+//            ItemFeatureView(store: .init(initialState: ItemFeature.State(item: .i), reducer: <#T##() -> Reducer#>))
+
         }
     }
 }
+
+//struct TestCountable: Countable {
+//    func trackedValue() -> TrackedValueModel {
+//
+//    }
+//    
+//    let value: Int
+//    var display: String {
+//        String(value)
+//    }
+//
+//    mutating func increment() -> TestCountable {
+//        TestCountable(value: value + 1)
+//    }
+//    
+//    mutating func decrement() -> TestCountable {
+//        TestCountable(value: value - 1)
+//    }
+//}
