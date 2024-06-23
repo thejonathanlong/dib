@@ -12,7 +12,7 @@ import Foundation
 @Reducer 
 struct LineGraphFeature {
 
-    struct Point: Identifiable {
+    struct Point: Identifiable, Equatable {
         let x: (valueDescription: String, value: Date)
         let y: (valueDescription: String, value: Double)
         let uniqueId: String
@@ -20,9 +20,13 @@ struct LineGraphFeature {
         var id: String {
             return uniqueId
         }
+
+        static func == (lhs: LineGraphFeature.Point, rhs: LineGraphFeature.Point) -> Bool {
+            lhs.x == rhs.x && lhs.y == rhs.y && lhs.uniqueId == rhs.uniqueId
+        }
     }
 
-    struct Line: Identifiable {
+    struct Line: Identifiable, Equatable {
         let points: [Point]
         let uniqueId: String
 

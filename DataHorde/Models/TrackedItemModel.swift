@@ -62,7 +62,7 @@ struct TrackedItemModel: AsyncDataStorableModel, Equatable {
         self.widget = widget
         self.color = color
         self.values = values
-        let numberValues = self.values.filter { $0.type.isNumber && Calendar.current.isDateInToday($0.date) }
+        let numberValues = self.values.filter { $0.isNumber && Calendar.current.isDateInToday($0.date) }
         let currentDoubleValue = numberValues.reduce(0.0) {
             switch $1.type {
             case .number(let value):

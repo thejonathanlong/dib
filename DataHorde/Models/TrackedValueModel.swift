@@ -20,15 +20,23 @@ struct Book: Codable, Equatable, CustomStringConvertible {
     }
 }
 
+struct TrackedValueModelConstants {
+    static let double = "double"
+    static let text = "text"
+    static let book = "book"
+}
+
+protocol DataConvertibleValue {
+    init(data: Data)
+
+    func convertToData() -> Data
+}
+
 struct TrackedValueModel: AsyncDataStorableModel, Equatable {
     typealias ManagedObject = DBValue
 
     enum TrackedValueType: Equatable {
-        struct Constants {
-            static let double = "double"
-            static let text = "text"
-            static let book = "book"
-        }
+
 
         case number(value: Double)
         case text(value: String)
@@ -36,7 +44,7 @@ struct TrackedValueModel: AsyncDataStorableModel, Equatable {
 
         init?(rawValue: String?, data: Data?) {
             switch rawValue?.lowercased() {
-            case Constants.double:
+            case TrackedValueModelConstants.double:
                 let value: Double
                 if let data, let string = String(data: data, encoding: .utf8) {
                     value = Double(string) ?? 0
@@ -52,11 +60,11 @@ struct TrackedValueModel: AsyncDataStorableModel, Equatable {
         var rawValue: String {
             switch self {
             case .number:
-                return Constants.double
+                return TrackedValueModelConstants.double
             case .text:
-                return Constants.text
+                return TrackedValueModelConstants.text
             case .book:
-                return Constants.book
+                return TrackedValueModelConstants.book
             }
         }
 
@@ -71,48 +79,6 @@ struct TrackedValueModel: AsyncDataStorableModel, Equatable {
                 return (try? encoder.encode(value)) ?? Data()
             }
         }
-
-        var value: String {
-            switch self {
-            case .number(let value):
-                return String(value)
-            case .text(value: let value):
-                return value
-            case .book(value: let value):
-                return value.description
-            }
-        }
-
-        var defaultValue: String {
-            switch self {
-            case .number:
-                return String(0)
-            case .text:
-                return ""
-            case .book:
-                return ""
-            }
-        }
-
-        var isNumber: Bool {
-            switch self {
-            case .number:
-                return true
-            case .text, .book:
-                return false
-            }
-        }
-
-        var numberValue: Double? {
-            switch self {
-            case .number(let value):
-                return value
-            case .text:
-                return nil
-            case .book:
-                return nil
-            }
-        }
     }
 
     var uniqueId: String = "ProbablyNeedAnIdProperty"
@@ -121,16 +87,50 @@ struct TrackedValueModel: AsyncDataStorableModel, Equatable {
 
     let date: Date
 
+    static var entityName: String {
+        "DBTrackedValue"
+    }
+
     var value: String {
-        type.value
+        switch type {
+        case .number(let value):
+            return String(value)
+        case .text(value: let value):
+            return value
+        case .book(value: let value):
+            return value.description
+        }
     }
 
     var defaultValue: String {
-        type.defaultValue
+        switch type {
+        case .number:
+            return String(0)
+        case .text:
+            return ""
+        case .book:
+            return ""
+        }
     }
 
-    static var entityName: String {
-        "DBTrackedValue"
+    var isNumber: Bool {
+        switch type {
+        case .number:
+            return true
+        case .text, .book:
+            return false
+        }
+    }
+
+    var numberValue: Double? {
+        switch type {
+        case .number(let value):
+            return value
+        case .text:
+            return nil
+        case .book:
+            return nil
+        }
     }
 
     init(object: ManagedObject) {
