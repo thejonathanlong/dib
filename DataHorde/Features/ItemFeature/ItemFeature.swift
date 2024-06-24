@@ -18,7 +18,27 @@ struct ItemFeature {
     @ObservableState
     struct State: Equatable {
         var item: TrackedItemModel
-        var counterWidgetSate: CounterFeature.State
+        lazy var counterWidgetSate: CounterFeature.State = {
+            if let items = item.values as? [TrackedValueModel<Double>], case .counter(let counterWidgetModel) = item.widget.type {
+                let currentValuse = items.filter { Calendar.current.isDateInToday($0.date) }.reduce(into: 0) { partialResult, nextValue in
+                    partialResult = partialResult + (nextValue.value ?? 0)
+                }
+                return .init(incrementValue: counterWidgetModel.incrementAmount,
+                             decrementValue: counterWidgetModel.decrementAmount,
+                             currentValue: currentValuse,
+                             name: item.name,
+                             color: Color(uiColor: item.color),
+                             notes: nil,
+                             date: Date(),
+                             lastValue: items.last?.value,
+                             lastDate: Date())
+            } else {
+                return .init(incrementValue: 0,
+                                          decrementValue: 0,
+                                          name: item.name,
+                                          color: Color(uiColor: item.color))
+            }
+        }()
         var textWidgetState: TextWidgetFeature.State
         var bookCounterWidgetState: BookCounterWidgetFeature.State
 
@@ -27,6 +47,7 @@ struct ItemFeature {
 
             switch item.widget.type {
             case .counter(let counterWidgetModel):
+
                 counterWidgetSate = CounterFeature.State(incrementValue: counterWidgetModel.incrementAmount,
                                                          decrementValue: counterWidgetModel.decrementAmount,
                                                          currentValue: item.currentNumberValue ?? 0.0,
@@ -103,19 +124,20 @@ struct ItemFeature {
         Reduce { state, action in
             switch action {
             case let .addValue(item: item):
-                let newValue: TrackedValueModel
-                switch item.widget.type {
-                case .bookCounter:
-                    newValue = state.bookCounterWidgetState.valueModel
-                case .counter:
-                    newValue = state.counterWidgetSate.valueModel
-                case .textOnly:
-                    newValue = state.textWidgetState.valueModel
-                }
+                let bookValueModel = state.bookCounterWidgetState.valueModel
+                let counterModel = state.counterWidgetSate.valueModel
+                let textModel = state.textWidgetState.valueModel
 
                 return .run { send in
                     do {
-                        try await itemCreationService.add(value: newValue, to: item)
+                        switch item.widget.type {
+                        case .bookCounter:
+                            try await itemCreationService.add<Book>(value: bookValueModel, to: item)
+                        case .counter:
+                            try await itemCreationService.add<Double>(value: counterModel, to: item)
+                        case .textOnly:
+                            try await itemCreationService.add<String>(value: textModel, to: item)
+                        }
                     } catch let error {
                         await send(.failedToAddValue(error: error))
                     }

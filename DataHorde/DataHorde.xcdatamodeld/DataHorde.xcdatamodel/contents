@@ -26,6 +26,7 @@
         <attribute name="hexColor" optional="YES" attributeType="String"/>
         <attribute name="name" attributeType="String" defaultValueString=""/>
         <attribute name="uniqueId" attributeType="String" defaultValueString=""/>
+        <attribute name="valueType" optional="YES" attributeType="String"/>
         <relationship name="values" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DBValue" inverseName="item" inverseEntity="DBValue"/>
         <relationship name="widget" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="DBWidget" inverseName="item" inverseEntity="DBWidget"/>
     </entity>

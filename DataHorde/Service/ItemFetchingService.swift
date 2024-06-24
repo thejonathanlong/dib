@@ -10,10 +10,11 @@ import Foundation
 import PoCampo
 
 protocol ItemsFetching {
+    associatedtype V: DataConvertibleValue
     func streamItems() -> AsyncThrowingStream<[TrackedItemModel], Error>
 }
 
-class ItemFetchingService: ItemsFetching {
+class ItemFetchingService<V: DataConvertibleValue>: ItemsFetching {
     @Dependency(\.dataStore) var dataStore
 
     var stream: AsyncThrowingStream<[TrackedItemModel], Error>?

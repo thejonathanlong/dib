@@ -5,6 +5,7 @@
 //  Created by Jonathan Long on 2/7/24.
 //
 
+import CoreData
 import Foundation
 import PoCampo
 import SwiftUI
@@ -12,27 +13,31 @@ import UIKit
 
 extension DBTrackedItem: UniqueManagedObject { }
 
-struct TrackedItemModel: AsyncDataStorableModel, Equatable {
+protocol ItemValueProvider: Equatable {
+    associatedtype ManagedObject: NSManagedObject
     
+    var uniqueId: String { get }
+    var date: Date { get }
+
+    func managedObject(context: NSManagedObjectContext) -> ManagedObject?
+}
+
+struct TrackedItemModel: AsyncDataStorableModel, Equatable {
     typealias ManagedObject = DBTrackedItem
 
     var uniqueId: String
 
     let name: String
 
-    let values: [TrackedValueModel]
+    let values: [any ItemValueProvider]
+
+    let valueType: TrackedValueType
 
     let widget: WidgetModel
 
     static var entityName: String {
         "DBTrackedItem"
     }
-
-    let currentValue: String?
-
-    let currentNumberValue: Double?
-
-    let lastValueDateString: String?
 
     let color: UIColor
 
@@ -43,44 +48,48 @@ struct TrackedItemModel: AsyncDataStorableModel, Equatable {
         } else {
             color = WidgetColors.darkGreen.color
         }
-        let values = (object.values ?? [])
-            .compactMap {
-                return TrackedValueModel(object: $0 as! DBValue)
-            }
-            .sorted(by: { $0.date > $1.date })
+
+        let type = TrackedValueType(rawValue: object.valueType ?? TrackedValueModelConstants.double)
+
+        let values: [any ItemValueProvider]
+        switch type {
+        case .number:
+            values = (object.values ?? [])
+                .compactMap {
+                    let dbValue = $0 as! DBValue
+                    return TrackedValueModel<Double>(object: $0 as! DBValue)
+                }
+        case .text:
+            values = (object.values ?? [])
+                .compactMap {
+                    let dbValue = $0 as! DBValue
+                    return TrackedValueModel<String>(object: $0 as! DBValue)
+                }
+        case .book:
+            values = (object.values ?? [])
+                .compactMap {
+                    let dbValue = $0 as! DBValue
+                    return TrackedValueModel<Book>(object: $0 as! DBValue)
+                }
+        case nil:
+            values = []
+        }
 
         self.init(uniqueId: object.uniqueId!,
                   name: object.name!,
                   widget: WidgetModel(object: object.widget!),
                   color: color,
+                  valueType: type ?? .number,
                   values: values)
     }
 
-    init(uniqueId: String, name: String, widget: WidgetModel, color: UIColor, values: [TrackedValueModel] = []) {
+    init(uniqueId: String, name: String, widget: WidgetModel, color: UIColor, valueType: TrackedValueType, values: [any ItemValueProvider] = []) {
         self.uniqueId = uniqueId
         self.name = name
         self.widget = widget
         self.color = color
-        self.values = values
-        let numberValues = self.values.filter { $0.isNumber && Calendar.current.isDateInToday($0.date) }
-        let currentDoubleValue = numberValues.reduce(0.0) {
-            switch $1.type {
-            case .number(let value):
-                return $0 + value
-            case .text, .book:
-                return $0
-            }
-        }
-        self.currentNumberValue = numberValues.isEmpty ? nil : currentDoubleValue
-        self.currentValue = numberValues.isEmpty ? self.values.first(where: { Calendar.current.isDateInToday($0.date) })?.value : "\(currentDoubleValue)"
-
-        if let date = values.first?.date {
-            lastValueDateString = DateUtilities.defaultDateFormatter.string(from: date)
-        } else {
-            lastValueDateString = nil
-        }
-
-
+        self.valueType = valueType
+        self.values = values.sorted(by: { $0.date > $1.date })
     }
 
     static func update(managedObject: DBTrackedItem, with model: TrackedItemModel) {
@@ -92,28 +101,50 @@ struct TrackedItemModel: AsyncDataStorableModel, Equatable {
             managedObject.widget = model.widget.managedObject(context: context)
         }
     }
+
+    static func == (lhs: TrackedItemModel, rhs: TrackedItemModel) -> Bool {
+        let defaultEquality = lhs.uniqueId == rhs.uniqueId && lhs.name == rhs.name && lhs.valueType == rhs.valueType && lhs.widget == rhs.widget
+        if defaultEquality {
+            switch lhs.valueType {
+            case .number:
+                guard let lhsValues = lhs.values as? [TrackedValueModel<Double>],
+                      let rhsValues = rhs.values as? [TrackedValueModel<Double>] else { return false }
+                return lhsValues == rhsValues
+            case .text:
+                guard let lhsValues = lhs.values as? [TrackedValueModel<String>],
+                      let rhsValues = rhs.values as? [TrackedValueModel<String>] else { return false }
+                return lhsValues == rhsValues
+            case .book:
+                guard let lhsValues = lhs.values as? [TrackedValueModel<Book>],
+                      let rhsValues = rhs.values as? [TrackedValueModel<Book>] else { return false }
+                return lhsValues == rhsValues
+            }
+        }
+        return defaultEquality
+    }
 }
 
-struct TrackedItemCountable: Countable {
-    var display: String {
-        String(currentValue)
-    }
 
-    var currentValue: Double
-    var incrementAmount: Double
-    var decrementAmount: Double
-
-    mutating func increment() -> TrackedItemCountable {
-        let newValue = currentValue + incrementAmount
-        return TrackedItemCountable(currentValue: newValue, incrementAmount: incrementAmount, decrementAmount: decrementAmount)
-    }
-    
-    mutating func decrement() -> TrackedItemCountable {
-        let newValue = currentValue - decrementAmount
-        return TrackedItemCountable(currentValue: newValue, incrementAmount: incrementAmount, decrementAmount: decrementAmount)
-    }
-    
-    func trackedValue() -> TrackedValueModel {
-        return TrackedValueModel(type: .number(value: currentValue))
-    }
-}
+//struct TrackedItemCountable: Countable {
+//    var display: String {
+//        String(currentValue)
+//    }
+//
+//    var currentValue: Double
+//    var incrementAmount: Double
+//    var decrementAmount: Double
+//
+//    mutating func increment() -> TrackedItemCountable {
+//        let newValue = currentValue + incrementAmount
+//        return TrackedItemCountable(currentValue: newValue, incrementAmount: incrementAmount, decrementAmount: decrementAmount)
+//    }
+//    
+//    mutating func decrement() -> TrackedItemCountable {
+//        let newValue = currentValue - decrementAmount
+//        return TrackedItemCountable(currentValue: newValue, incrementAmount: incrementAmount, decrementAmount: decrementAmount)
+//    }
+//    
+//    func trackedValue() -> TrackedValueModel<V> {
+//        return TrackedValueModel(type: .number(value: currentValue))
+//    }
+//}

@@ -10,7 +10,30 @@ import PoCampo
 
 extension DBValue: UniqueManagedObject { }
 
-struct Book: Codable, Equatable, CustomStringConvertible {
+struct Book: Codable, Equatable, CustomStringConvertible, DataConvertibleValue {
+    init?(valueData: Data) {
+        let decoder = JSONDecoder()
+        if let book = try? decoder.decode(Book.self, from: valueData) {
+            self = book
+        } else {
+            return nil
+        }
+    }
+
+    init(title: String?, author: String?) {
+        self.title = title
+        self.author = author
+    }
+
+    func convertToData() -> Data? {
+        let encoder = JSONEncoder()
+        return try? encoder.encode(self)
+    }
+
+    var defaultValue: Book {
+        .init(title: nil, author: nil)
+    }
+
     let title: String?
     let author: String?
 
@@ -26,127 +49,80 @@ struct TrackedValueModelConstants {
     static let book = "book"
 }
 
-protocol DataConvertibleValue {
-    init(data: Data)
+protocol DataConvertibleValue: Equatable {
+    init?(valueData: Data)
 
-    func convertToData() -> Data
+    func convertToData() -> Data?
+
+    var defaultValue: Self { get }
 }
 
-struct TrackedValueModel: AsyncDataStorableModel, Equatable {
-    typealias ManagedObject = DBValue
+extension String: DataConvertibleValue {
+    init?(valueData: Data) {
+        self.init(data: valueData, encoding: .utf8)
+    }
+    func convertToData() -> Data? {
+        data(using: .utf8)
+    }
+    
+    var defaultValue: String {
+        ""
+    }
+}
 
-    enum TrackedValueType: Equatable {
-
-
-        case number(value: Double)
-        case text(value: String)
-        case book(value: Book)
-
-        init?(rawValue: String?, data: Data?) {
-            switch rawValue?.lowercased() {
-            case TrackedValueModelConstants.double:
-                let value: Double
-                if let data, let string = String(data: data, encoding: .utf8) {
-                    value = Double(string) ?? 0
-                } else {
-                    value = 0
-                }
-                self = .number(value: value)
-            default:
-                return nil
-            }
-        }
-
-        var rawValue: String {
-            switch self {
-            case .number:
-                return TrackedValueModelConstants.double
-            case .text:
-                return TrackedValueModelConstants.text
-            case .book:
-                return TrackedValueModelConstants.book
-            }
-        }
-
-        var rawData: Data {
-            switch self {
-            case let .number(value: value):
-                return String(value).data(using: .utf8) ?? Data()
-            case let .text(value: value):
-                return value.data(using: .utf8) ?? Data()
-            case let .book(value: value):
-                let encoder = JSONEncoder()
-                return (try? encoder.encode(value)) ?? Data()
-            }
+extension Double: DataConvertibleValue {
+    init?(valueData: Data) {
+        if let string = String(data: valueData, encoding: .utf8) {
+            self = Double(string) ?? 0
+        } else {
+            self = 0
         }
     }
 
-    var uniqueId: String = "ProbablyNeedAnIdProperty"
+    func convertToData() -> Data? {
+        String(self).data(using: .utf8) ?? Data()
+    }
+    
+    var defaultValue: Double {
+        0
+    }
+}
+
+enum TrackedValueType: String, Equatable {
+    case number
+    case text
+    case book
+}
+
+struct TrackedValueModel<V: DataConvertibleValue>: AsyncDataStorableModel, Equatable, ItemValueProvider {
+    typealias ManagedObject = DBValue
+
+    let value: V?
 
     let type: TrackedValueType
 
-    let date: Date
+    var uniqueId: String = "ProbablyNeedAnIdProperty"
+
+    var date: Date
 
     static var entityName: String {
         "DBTrackedValue"
     }
 
-    var value: String {
-        switch type {
-        case .number(let value):
-            return String(value)
-        case .text(value: let value):
-            return value
-        case .book(value: let value):
-            return value.description
-        }
-    }
-
-    var defaultValue: String {
-        switch type {
-        case .number:
-            return String(0)
-        case .text:
-            return ""
-        case .book:
-            return ""
-        }
-    }
-
-    var isNumber: Bool {
-        switch type {
-        case .number:
-            return true
-        case .text, .book:
-            return false
-        }
-    }
-
-    var numberValue: Double? {
-        switch type {
-        case .number(let value):
-            return value
-        case .text:
-            return nil
-        case .book:
-            return nil
-        }
-    }
-
     init(object: ManagedObject) {
-        self.type = .init(rawValue: object.type, data: object.value) ?? .number(value: 0)
-        self.date = object.date ?? Date()
+        let type = TrackedValueType(rawValue: object.type ?? TrackedValueModelConstants.double) ?? .number
+        self.init(type: type, value: V(valueData: object.value ?? Data()))
     }
 
-    init(type: TrackedValueType, date: Date = Date()) {
+    init(type: TrackedValueType, value: V?, date: Date = Date()) {
         self.type = type
         self.date = date
+        self.value = value
     }
 
     static func update(managedObject: ManagedObject, with model: TrackedValueModel) {
         managedObject.type = model.type.rawValue
-        managedObject.value = model.type.rawData
+        managedObject.value = model.value?.convertToData()
         managedObject.date = model.date
     }
 }
-

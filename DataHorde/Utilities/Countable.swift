@@ -7,12 +7,12 @@
 
 import Foundation
 
-protocol Countable: Equatable {
-    var display: String { get }
-
-    mutating func increment() -> Self
-
-    mutating func decrement() -> Self
-
-    func trackedValue() -> TrackedValueModel
-}
+//protocol Countable: Equatable {
+//    var display: String { get }
+//
+//    mutating func increment() -> Self
+//
+//    mutating func decrement() -> Self
+//
+//    func trackedValue() -> TrackedValueModel
+//}

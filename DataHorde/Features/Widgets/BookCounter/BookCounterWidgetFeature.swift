@@ -23,8 +23,8 @@ struct BookCounterWidgetFeature {
         let lastDate: String?
         var color: Color
 
-        var valueModel: TrackedValueModel {
-            return TrackedValueModel(type: .book(value: .init(title: title, author: author)))
+        var valueModel: TrackedValueModel<Book> {
+            return TrackedValueModel(type: .book, value: .init(title: title, author: author))
         }
     }
 
