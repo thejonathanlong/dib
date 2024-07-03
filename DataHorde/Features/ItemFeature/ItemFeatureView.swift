@@ -11,28 +11,24 @@ import SwiftUI
 struct ItemFeatureView: View {
     @Bindable var store: StoreOf<ItemFeature>
 
-    var item: TrackedItemModel {
-        store.state.item
-    }
-
     var body: some View {
         VStack {
             widget
             Button(action: {
-                store.send(.addValue(item: item))
+                store.send(.addValue)
             }, label: {
                 Text("Add Value")
             })
         }
         .padding(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
         .overlay (RoundedRectangle(cornerRadius: 12.0)
-            .stroke(Color(uiColor: item.color), lineWidth: 4.0)
+            .stroke(Color(uiColor: store.state.itemColor), lineWidth: 4.0)
         )
     }
 
     var widget: some View {
         Group {
-            switch item.widget.type {
+            switch store.state.widgetType {
             case .counter:
                 CounterWidget(store: store.scope(state: \.counterWidgetSate, action: \.counterWidgetAction))
             case .textOnly:

@@ -31,7 +31,7 @@ private enum WidgetCreatableKey: DependencyKey {
 }
 
 private enum ItemsFetchingKey: DependencyKey {
-    static var liveValue: ItemsFetching = ItemFetchingService()
+    static var liveValue: any ItemsFetching = ItemFetchingService()
 }
 
 extension DependencyValues {

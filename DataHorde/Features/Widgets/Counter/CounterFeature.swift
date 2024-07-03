@@ -24,8 +24,14 @@ struct CounterFeature {
         var lastValue: String? = nil
         var lastDate = Date() // this is wrong
 
-        var valueModel: TrackedValueModel<Double> {
-            .init(type: .number, value: currentValue)
+        let uuid = UUID()
+
+        var uniqueId: String {
+            uuid.uuidString + "." + DateUtilities.defaultDateFormatter.string(from: date) + "." + "\(currentValue)"
+        }
+
+        var valueModel: TrackedValueModel {
+            .init(type: .number, value: currentValue, uniqueId: uniqueId, date: date)
         }
     }
 
