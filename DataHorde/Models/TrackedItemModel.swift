@@ -22,18 +22,26 @@ protocol ItemValueProvider: Equatable {
     func managedObject(context: NSManagedObjectContext) -> ManagedObject?
 }
 
-struct TrackedItemModel: AsyncDataStorableModel, Equatable {
+protocol TrackedItemModelInterface {
+    var widgetType: WidgetModel.WidgetType { get }
+}
+
+struct TrackedItemModel: AsyncDataStorableModel, Equatable, TrackedItemModelInterface {
     typealias ManagedObject = DBTrackedItem
 
     var uniqueId: String
 
     let name: String
 
-    let values: [any ItemValueProvider]
+    let values: [TrackedValueModel]
 
     let valueType: TrackedValueType
 
     let widget: WidgetModel
+
+    var widgetType: WidgetModel.WidgetType {
+        widget.type
+    }
 
     static var entityName: String {
         "DBTrackedItem"
@@ -51,29 +59,8 @@ struct TrackedItemModel: AsyncDataStorableModel, Equatable {
 
         let type = TrackedValueType(rawValue: object.valueType ?? TrackedValueModelConstants.double)
 
-        let values: [any ItemValueProvider]
-        switch type {
-        case .number:
-            values = (object.values ?? [])
-                .compactMap {
-                    let dbValue = $0 as! DBValue
-                    return TrackedValueModel<Double>(object: $0 as! DBValue)
-                }
-        case .text:
-            values = (object.values ?? [])
-                .compactMap {
-                    let dbValue = $0 as! DBValue
-                    return TrackedValueModel<String>(object: $0 as! DBValue)
-                }
-        case .book:
-            values = (object.values ?? [])
-                .compactMap {
-                    let dbValue = $0 as! DBValue
-                    return TrackedValueModel<Book>(object: $0 as! DBValue)
-                }
-        case nil:
-            values = []
-        }
+        let values = (object.values ?? [])
+            .compactMap { TrackedValueModel(object: $0 as! DBValue) }
 
         self.init(uniqueId: object.uniqueId!,
                   name: object.name!,
@@ -83,7 +70,12 @@ struct TrackedItemModel: AsyncDataStorableModel, Equatable {
                   values: values)
     }
 
-    init(uniqueId: String, name: String, widget: WidgetModel, color: UIColor, valueType: TrackedValueType, values: [any ItemValueProvider] = []) {
+    init(uniqueId: String,
+         name: String,
+         widget: WidgetModel,
+         color: UIColor,
+         valueType: TrackedValueType,
+         values: [TrackedValueModel] = []) {
         self.uniqueId = uniqueId
         self.name = name
         self.widget = widget
@@ -97,54 +89,16 @@ struct TrackedItemModel: AsyncDataStorableModel, Equatable {
         managedObject.name = model.name
         managedObject.hexColor = model.color.hex
         if let context = managedObject.managedObjectContext {
-            managedObject.values = NSSet(array: model.values.compactMap { $0.managedObject(context: context) })
+            if managedObject.values == nil {
+                managedObject.values = NSSet()
+            }
+            model
+                .values
+                .compactMap { $0.managedObject(context: context) }
+                .forEach {
+                    managedObject.addToValues($0)
+                }
             managedObject.widget = model.widget.managedObject(context: context)
         }
     }
-
-    static func == (lhs: TrackedItemModel, rhs: TrackedItemModel) -> Bool {
-        let defaultEquality = lhs.uniqueId == rhs.uniqueId && lhs.name == rhs.name && lhs.valueType == rhs.valueType && lhs.widget == rhs.widget
-        if defaultEquality {
-            switch lhs.valueType {
-            case .number:
-                guard let lhsValues = lhs.values as? [TrackedValueModel<Double>],
-                      let rhsValues = rhs.values as? [TrackedValueModel<Double>] else { return false }
-                return lhsValues == rhsValues
-            case .text:
-                guard let lhsValues = lhs.values as? [TrackedValueModel<String>],
-                      let rhsValues = rhs.values as? [TrackedValueModel<String>] else { return false }
-                return lhsValues == rhsValues
-            case .book:
-                guard let lhsValues = lhs.values as? [TrackedValueModel<Book>],
-                      let rhsValues = rhs.values as? [TrackedValueModel<Book>] else { return false }
-                return lhsValues == rhsValues
-            }
-        }
-        return defaultEquality
-    }
 }
-
-
-//struct TrackedItemCountable: Countable {
-//    var display: String {
-//        String(currentValue)
-//    }
-//
-//    var currentValue: Double
-//    var incrementAmount: Double
-//    var decrementAmount: Double
-//
-//    mutating func increment() -> TrackedItemCountable {
-//        let newValue = currentValue + incrementAmount
-//        return TrackedItemCountable(currentValue: newValue, incrementAmount: incrementAmount, decrementAmount: decrementAmount)
-//    }
-//    
-//    mutating func decrement() -> TrackedItemCountable {
-//        let newValue = currentValue - decrementAmount
-//        return TrackedItemCountable(currentValue: newValue, incrementAmount: incrementAmount, decrementAmount: decrementAmount)
-//    }
-//    
-//    func trackedValue() -> TrackedValueModel<V> {
-//        return TrackedValueModel(type: .number(value: currentValue))
-//    }
-//}

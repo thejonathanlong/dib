@@ -71,16 +71,20 @@ struct ItemsListFeature {
                         let uniqueId = UUID().uuidString
                         let selectedWidgetType = addItemState.widgetTypeSelectionState.selectedOption
                         let widgetType: WidgetModel.WidgetType
+                        let trackedValueType: TrackedValueType
 
                         switch selectedWidgetType {
                         case .textOnly:
                             widgetType = .textOnly(TextOnlyWidgetModel(uniqueId: uniqueId))
+                            trackedValueType = .text
                         case .counter:
                             widgetType = .counter(CounterWidgetModel(uniqueId: uniqueId,
                                                                      incrementValue: addItemState.counterOptionsState.incrementValueSelectionState.selectedOption.rawValue,
                                                                      measurement: addItemState.counterOptionsState.itemMeasurementSelectionState.selectedOption))
+                            trackedValueType = .number
                         case .bookCounter:
                             widgetType = .bookCounter(.init(uniqueId: uniqueId, title: "", author: ""))
+                            trackedValueType = .book
                         }
 
                         let widget = WidgetModel(uniqueId: uniqueId, type: widgetType)
@@ -92,7 +96,8 @@ struct ItemsListFeature {
                             let widgetModel = try await self.widgetCreationService.createWidget(widgetModel: widget)
                             let _ = try await self.itemCreationService.createItem(name: name,
                                                                                   color: color,
-                                                                                  widgetModel: widgetModel)
+                                                                                  widgetModel: widgetModel,
+                                                                                  valueType: trackedValueType)
                         }
                         
                     case .cancel:

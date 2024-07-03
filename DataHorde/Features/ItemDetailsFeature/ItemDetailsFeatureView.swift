@@ -32,12 +32,12 @@ struct ItemDetailsFeatureView: View {
                         .toggleStyle(.button)
                 }
             }
-            if showLineGraph {
-                LineGraph(lines: [store.state.line])
-            }
-            if showBarGraph {
-                BarGraph(bars: store.state.line.points)
-            }
+//            if showLineGraph {
+//                LineGraph(lines: [store.state.line])
+//            }
+//            if showBarGraph {
+//                BarGraph(bars: store.state.line.points)
+//            }
         }
     }
 }

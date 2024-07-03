@@ -20,9 +20,14 @@ struct TextWidgetFeature {
         var lastValue: String?
         var lastValueDate: String?
         var color: Color
+        let uuid = UUID()
+
+        var uniqueId: String {
+            uuid.uuidString + "." + DateUtilities.defaultDateFormatter.string(from: date) + "." + "\(text)"
+        }
 
         var valueModel: TrackedValueModel {
-            .init(type: .text(value: text), date: date)
+            .init(type: .text, value: text, uniqueId: uniqueId, date: date)
         }
     }
 

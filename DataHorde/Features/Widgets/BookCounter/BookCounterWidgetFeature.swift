@@ -22,9 +22,18 @@ struct BookCounterWidgetFeature {
         let lastValue: String?
         let lastDate: String?
         var color: Color
+        let uuid = UUID()
 
-        var valueModel: TrackedValueModel<Book> {
-            return TrackedValueModel(type: .book, value: .init(title: title, author: author))
+        var uniqueId: String {
+            uuid.uuidString + "." + DateUtilities.defaultDateFormatter.string(from: startDate) + "." + "\(book.description)"
+        }
+
+        var book: Book {
+            Book(title: title, author: author)
+        }
+
+        var valueModel: TrackedValueModel {
+            return TrackedValueModel(type: .book, value: book, uniqueId: uniqueId, date: startDate)
         }
     }
 

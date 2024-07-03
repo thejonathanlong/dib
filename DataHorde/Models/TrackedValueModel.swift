@@ -94,35 +94,51 @@ enum TrackedValueType: String, Equatable {
     case book
 }
 
-struct TrackedValueModel<V: DataConvertibleValue>: AsyncDataStorableModel, Equatable, ItemValueProvider {
+struct TrackedValueModel: AsyncDataStorableModel, Equatable, ItemValueProvider {
+    static func == (lhs: TrackedValueModel, rhs: TrackedValueModel) -> Bool {
+        lhs.uniqueId == rhs.uniqueId && lhs.date == rhs.date && lhs.type == rhs.type && lhs.data == rhs.data
+    }
+    
     typealias ManagedObject = DBValue
 
-    let value: V?
+    let data: Data?
+
+    let value: Any?
 
     let type: TrackedValueType
 
-    var uniqueId: String = "ProbablyNeedAnIdProperty"
+    var uniqueId: String
 
     var date: Date
 
     static var entityName: String {
-        "DBTrackedValue"
+        "DBValue"
     }
 
     init(object: ManagedObject) {
         let type = TrackedValueType(rawValue: object.type ?? TrackedValueModelConstants.double) ?? .number
-        self.init(type: type, value: V(valueData: object.value ?? Data()))
+        switch type {
+        case .number:
+            self.init(type: type, value: Double(valueData: object.value ?? Data()), uniqueId: object.uniqueId!)
+        case .text:
+            self.init(type: type, value: String(valueData: object.value ?? Data()), uniqueId: object.uniqueId!)
+        case .book:
+            self.init(type: type, value: Book(valueData: object.value ?? Data()), uniqueId: object.uniqueId!)
+        }
     }
 
-    init(type: TrackedValueType, value: V?, date: Date = Date()) {
+    init<V: DataConvertibleValue>(type: TrackedValueType, value: V?, uniqueId: String, date: Date = Date()) {
         self.type = type
         self.date = date
         self.value = value
+        self.data = value?.convertToData()
+        self.uniqueId = uniqueId
     }
 
     static func update(managedObject: ManagedObject, with model: TrackedValueModel) {
         managedObject.type = model.type.rawValue
-        managedObject.value = model.value?.convertToData()
+        managedObject.value = model.data
         managedObject.date = model.date
+        managedObject.uniqueId = model.uniqueId
     }
 }
