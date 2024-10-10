@@ -8,6 +8,7 @@
 import ComposableArchitecture
 import Foundation
 import PoCampo
+import OSLog
 
 @Reducer
 struct ItemsListFeature {
@@ -16,17 +17,21 @@ struct ItemsListFeature {
     @Dependency(\.widgetCreationService) var widgetCreationService
     @Dependency(\.itemFetchingStream) var itemFetchingStream
 
+    let logger = Logger(subsystem: "com.jlo.ItemListFeature", category: "Feature")
+
     @ObservableState
     struct State {
         var items: [TrackedItemModel]
-        @Presents var itemDetails: ItemFeature.State?
+        @Presents var itemDetails: ItemDetailsFeature.State?
         @Presents var addItem: AddItemFeature.State?
         var stream: AsyncThrowingStream<[TrackedItemModel], Error>?
+        var showInfo: Bool = false
     }
 
     enum Action {
-        case itemDetails(PresentationAction<ItemFeature.Action>)
+        case itemDetails(PresentationAction<ItemDetailsFeature.Action>)
         case itemTapped(item: TrackedItemModel)
+        case showInfo(item: TrackedItemModel)
         case addItemTapped
         case addItem(PresentationAction<AddItemFeature.Action>)
         case fetchItems
@@ -37,17 +42,21 @@ struct ItemsListFeature {
         Reduce { state, action in
             switch action {
             case let .itemTapped(item: item):
+                logger.log("ItemsListFeature: Received action itemTapped \(item.uniqueId)")
                 state.itemDetails = .init(item: item)
                 return .none
 
             case .itemDetails:
+                logger.log("ItemsListFeature: Received action itemDetails")
                 return .none
 
             case .updateItems(let items):
+                logger.log("ItemsListFeature: Received action updateItems \(items.count)")
                 state.items = items
                 return .none
 
             case .fetchItems:
+                logger.log("ItemsListFeature: Received action fetchItems")
                 return .run { send in
                     for try await items in itemFetchingStream.streamItems() {
                         await send(.updateItems(items))
@@ -55,7 +64,13 @@ struct ItemsListFeature {
                 }
 
             case .addItemTapped:
+                logger.log("ItemsListFeature: Received action addItemTapped")
                 state.addItem = .init()
+                return .none
+
+            case let .showInfo(item: item):
+                logger.log("ItemsListFeature: Received action showInfo \(item.uniqueId)")
+                state.showInfo.toggle()
                 return .none
 
             case .addItem(let action):
@@ -66,6 +81,7 @@ struct ItemsListFeature {
                 case .presented(let addItemAction):
                     switch addItemAction {
                     case .createItem:
+                        logger.log("ItemsListFeature: Received action createItem")
                         guard let addItemState = state.addItem else { return .none }
 
                         let uniqueId = UUID().uuidString
@@ -83,7 +99,7 @@ struct ItemsListFeature {
                                                                      measurement: addItemState.counterOptionsState.itemMeasurementSelectionState.selectedOption))
                             trackedValueType = .number
                         case .bookCounter:
-                            widgetType = .bookCounter(.init(uniqueId: uniqueId, title: "", author: ""))
+                            widgetType = .bookCounter(.init(uniqueId: uniqueId, title: "", creator: ""))
                             trackedValueType = .book
                         }
 
@@ -111,7 +127,7 @@ struct ItemsListFeature {
             }
         }
         .ifLet(\.$itemDetails, action: \.itemDetails) {
-            ItemFeature()
+            ItemDetailsFeature()
         }
         .ifLet(\.$addItem, action: \.addItem) {
             AddItemFeature()

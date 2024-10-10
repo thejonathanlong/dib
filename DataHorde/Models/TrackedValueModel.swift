@@ -10,36 +10,36 @@ import PoCampo
 
 extension DBValue: UniqueManagedObject { }
 
-struct Book: Codable, Equatable, CustomStringConvertible, DataConvertibleValue {
+struct Media: Codable, Equatable, CustomStringConvertible, DataConvertibleValue {
+    var defaultValue: Media {
+        .init(title: nil, creator: nil)
+    }
+
+    let title: String?
+    let creator: String?
+
+    var description: String {
+        guard let title, let creator else { return "" }
+        return title + " by " + creator
+    }
+
     init?(valueData: Data) {
         let decoder = JSONDecoder()
-        if let book = try? decoder.decode(Book.self, from: valueData) {
-            self = book
+        if let media = try? decoder.decode(Media.self, from: valueData) {
+            self = media
         } else {
             return nil
         }
     }
 
-    init(title: String?, author: String?) {
+    init(title: String?, creator: String?) {
         self.title = title
-        self.author = author
+        self.creator = creator
     }
 
     func convertToData() -> Data? {
         let encoder = JSONEncoder()
         return try? encoder.encode(self)
-    }
-
-    var defaultValue: Book {
-        .init(title: nil, author: nil)
-    }
-
-    let title: String?
-    let author: String?
-
-    var description: String {
-        guard let title, let author else { return "" }
-        return title + " by " + author
     }
 }
 
@@ -49,7 +49,7 @@ struct TrackedValueModelConstants {
     static let book = "book"
 }
 
-protocol DataConvertibleValue: Equatable {
+protocol DataConvertibleValue: Equatable, CustomStringConvertible {
     init?(valueData: Data)
 
     func convertToData() -> Data?
@@ -103,6 +103,8 @@ struct TrackedValueModel: AsyncDataStorableModel, Equatable, ItemValueProvider {
 
     let data: Data?
 
+    let formattedDate: String
+
     let value: Any?
 
     let type: TrackedValueType
@@ -115,24 +117,28 @@ struct TrackedValueModel: AsyncDataStorableModel, Equatable, ItemValueProvider {
         "DBValue"
     }
 
+    let description: String
+
     init(object: ManagedObject) {
         let type = TrackedValueType(rawValue: object.type ?? TrackedValueModelConstants.double) ?? .number
         switch type {
         case .number:
-            self.init(type: type, value: Double(valueData: object.value ?? Data()), uniqueId: object.uniqueId!)
+            self.init(type: type, value: Double(valueData: object.value ?? Data()), uniqueId: object.uniqueId!, date: object.date ?? Date())
         case .text:
-            self.init(type: type, value: String(valueData: object.value ?? Data()), uniqueId: object.uniqueId!)
+            self.init(type: type, value: String(valueData: object.value ?? Data()), uniqueId: object.uniqueId!, date: object.date ?? Date())
         case .book:
-            self.init(type: type, value: Book(valueData: object.value ?? Data()), uniqueId: object.uniqueId!)
+            self.init(type: type, value: Media(valueData: object.value ?? Data()), uniqueId: object.uniqueId!, date: object.date ?? Date())
         }
     }
 
-    init<V: DataConvertibleValue>(type: TrackedValueType, value: V?, uniqueId: String, date: Date = Date()) {
+    init<V: DataConvertibleValue>(type: TrackedValueType, value: V?, uniqueId: String, date: Date) {
         self.type = type
         self.date = date
         self.value = value
         self.data = value?.convertToData()
         self.uniqueId = uniqueId
+        self.description = value?.description ?? "No description."
+        self.formattedDate = DateUtilities.defaultDateFormatter.string(from: date)
     }
 
     static func update(managedObject: ManagedObject, with model: TrackedValueModel) {

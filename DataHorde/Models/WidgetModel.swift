@@ -18,7 +18,7 @@ struct WidgetModel: AsyncDataStorableModel, Equatable {
                                                          .textOnly(.init()),
                                                          .bookCounter(.init(uniqueId: "",
                                                                             title: "",
-                                                                            author: "",
+                                                                            creator: "",
                                                                             endDate: nil))]
 
         var backgroundColor: Color {

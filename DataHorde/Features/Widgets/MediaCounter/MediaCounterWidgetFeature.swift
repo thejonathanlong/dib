@@ -11,11 +11,11 @@ import PoCampo
 import SwiftUI
 
 @Reducer
-struct BookCounterWidgetFeature {
+struct MediaCounterWidgetFeature {
 
     @ObservableState
     struct State {
-        var author = ""
+        var creator = ""
         var title = ""
         var startDate = Date()
         var endDate: Date
@@ -28,8 +28,8 @@ struct BookCounterWidgetFeature {
             uuid.uuidString + "." + DateUtilities.defaultDateFormatter.string(from: startDate) + "." + "\(book.description)"
         }
 
-        var book: Book {
-            Book(title: title, author: author)
+        var book: Media {
+            Media(title: title, creator: creator)
         }
 
         var valueModel: TrackedValueModel {
@@ -38,7 +38,7 @@ struct BookCounterWidgetFeature {
     }
 
     enum Action {
-        case authorChanged(author: String)
+        case creatorChanged(creator: String)
         case titleChanged(title: String)
         case startDateChanged(date: Date)
         case endDateChanged(date: Date)
@@ -47,8 +47,8 @@ struct BookCounterWidgetFeature {
     var body: some Reducer<State, Action> {
         Reduce { state, action in
             switch action {
-            case .authorChanged(let author):
-                state.author = author
+            case .creatorChanged(let creator):
+                state.creator = creator
                 return .none
             case .titleChanged(let title):
                 state.title = title

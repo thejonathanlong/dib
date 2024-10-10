@@ -8,6 +8,7 @@
 import Dependencies
 import Foundation
 import PoCampo
+import OSLog
 
 protocol ItemCreatable {
     func createItem(name: String, color: WidgetColors, widgetModel: WidgetModel, valueType: TrackedValueType) async throws -> TrackedItemModel
@@ -17,10 +18,12 @@ protocol ItemCreatable {
 struct ItemCreationService: ItemCreatable {
     @Dependency(\.dataStore) var dataStore
 
+    let logger = Logger(subsystem: "com.jlo.ItemCreationService", category: "ItemCreation")
     func createItem(name: String,
                     color: WidgetColors,
                     widgetModel: WidgetModel,
                     valueType: TrackedValueType) async throws -> TrackedItemModel {
+        logger.log("ItemCreationService: Adding item named \(name)")
         let uniqueId = UUID().uuidString
         let trackedItem = TrackedItemModel(uniqueId: uniqueId,
                                            name: name,
@@ -30,6 +33,7 @@ struct ItemCreationService: ItemCreatable {
     }
 
     func add(value: TrackedValueModel, to item: TrackedItemModel) async throws {
+        logger.log("ItemCreationService: Adding value \(value.description) to item named \(item.name)")
         var newValues = item.values
         newValues.append(value)
         let newItem = TrackedItemModel(uniqueId: item.uniqueId,

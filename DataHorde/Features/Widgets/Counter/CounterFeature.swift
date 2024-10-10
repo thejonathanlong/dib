@@ -21,8 +21,9 @@ struct CounterFeature {
         var color: Color
         var notes: String?
         var date: Date = Date()
-        var lastValue: String? = nil
-        var lastDate = Date() // this is wrong
+        var dailyValue: String? = nil
+        var lastDate: Date?
+        var isDatePickerEnabled: Bool = true
 
         let uuid = UUID()
 

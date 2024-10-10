@@ -12,32 +12,20 @@ import SwiftUI
 struct ItemDetailsFeatureView: View {
 
     @Bindable var store: StoreOf<ItemDetailsFeature>
-    @State var showHeatMap: Bool
-    @State var showLineGraph: Bool
-    @State var showBarGraph: Bool
 
     var body: some View {
-        VStack {
-            HStack {
-                if store.state.canShowHeatMap {
-                    Toggle("Heat Map", isOn: $showHeatMap)
-                        .toggleStyle(.button)
-                }
-                if store.state.canShowBarGraph {
-                    Toggle("Bar Graph", isOn: $showBarGraph)
-                        .toggleStyle(.button)
-                }
-                if store.state.canShowLineGraph {
-                    Toggle("Line Graph", isOn: $showLineGraph)
-                        .toggleStyle(.button)
+        ScrollView {
+            LazyVStack {
+                ForEach(store.state.item.values) { value in
+                    HStack {
+                        Text(value.description)
+                        Text(value.formattedDate)
+                    }
+                    .background {
+                        RoundedRectangle(cornerRadius: 12, style: .continuous).stroke(lineWidth: 2)
+                    }
                 }
             }
-//            if showLineGraph {
-//                LineGraph(lines: [store.state.line])
-//            }
-//            if showBarGraph {
-//                BarGraph(bars: store.state.line.points)
-//            }
         }
     }
 }

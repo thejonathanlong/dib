@@ -26,10 +26,11 @@ struct WidgetSelector: View {
                                     currentValueString: "\(currentValue) \(store.selectedMeasurement.abbreviation(count: currentValue))",
                                     color: store.state.color,
                                     date: .constant(Date()),
-                                    lastValue: "\(lastValue) \(store.selectedMeasurement.abbreviation(count: currentValue))",
+                                    dailyValue: "\(lastValue) \(store.selectedMeasurement.abbreviation(count: currentValue))",
                                     lastDate: Date().addingTimeInterval(TimeInterval(60 * 30 * -1)),
                                     onDecrement: { currentValue -= 1 },
-                                    onIncrement: { currentValue += 1 })
+                                    onIncrement: { currentValue += 1 },
+                                    onInfo: {})
                         .background(RoundedRectangle(cornerRadius: 12).stroke(store.state.color, lineWidth: 3.0))
                     }
                     .tag(index)

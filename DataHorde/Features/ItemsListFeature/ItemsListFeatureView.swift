@@ -37,11 +37,32 @@ struct ItemsListFeatureView: View {
         
         LazyVGrid(columns: rows, spacing: Constants.rowSpacing, content: {
             ForEach(store.items) { (item: TrackedItemModel) in
-                ItemFeatureView(store: .init(initialState: .init(item: item), reducer: {
-                    ItemFeature()
-                }))
-                .onTapGesture {
-                    store.send(.itemTapped(item: item))
+                switch item.widgetType {
+                case .counter:
+                    ItemFeatureView(store: .init(initialState: .init(item: item), reducer: {
+                        ItemFeature<Double>()
+                    })) {
+                        store.send(.itemTapped(item: item))
+                    } onInfo: {
+                        
+                    }
+
+                case .textOnly:
+                    ItemFeatureView<String>(store: .init(initialState: .init(item: item), reducer: {
+                        ItemFeature()
+                    })) {
+                        store.send(.itemTapped(item: item))
+                    } onInfo: {
+                        store.send(.showInfo(item: item))
+                    }
+                case .bookCounter:
+                    ItemFeatureView<Media>(store: .init(initialState: .init(item: item), reducer: {
+                        ItemFeature()
+                    })) {
+                        store.send(.itemTapped(item: item))
+                    } onInfo: {
+                        store.send(.showInfo(item: item))
+                    }
                 }
             }
         })
@@ -66,7 +87,7 @@ struct ItemsListFeatureView: View {
                     item: $store.scope(state: \.itemDetails,
                                        action: \.itemDetails)
                 ) { store in
-                    ItemFeatureView(store: store)
+                    ItemDetailsFeatureView(store: store)
                 }
             }
             .navigationTitle("Items")
@@ -86,4 +107,28 @@ struct DateUtilities {
         formatter.timeStyle = .medium
         return formatter
     }()
+}
+
+extension Double: ItemPlottable {
+    typealias Value = Self
+
+    var graphValue: Value {
+        return self
+    }
+}
+
+extension String: ItemPlottable {
+    typealias Value = Self
+
+    var graphValue: Value {
+        return self
+    }
+}
+
+extension Media: ItemPlottable {
+    typealias Value = String
+
+    var graphValue: Value {
+        return title ?? description
+    }
 }

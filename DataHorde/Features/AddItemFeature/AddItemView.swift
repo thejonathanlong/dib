@@ -56,17 +56,18 @@ struct AddItemView: View {
                                     currentValueString: "\(currentValue) \(store.counterOptionsState.itemMeasurementSelectionState.selectedOption.abbreviation(count: currentValue))",
                                     color: Color(uiColor: store.state.colorSelectionState.selectedOption.color),
                                     date: .constant(Date()),
-                                    lastValue: "\(lastValue) \(store.counterOptionsState.itemMeasurementSelectionState.selectedOption.abbreviation(count: currentValue))",
+                                    dailyValue: "\(lastValue) \(store.counterOptionsState.itemMeasurementSelectionState.selectedOption.abbreviation(count: currentValue))",
                                     lastDate: Date().addingTimeInterval(TimeInterval(60 * 30 * -1)),
                                     onDecrement: { currentValue -= 1 },
-                                    onIncrement: { currentValue += 1 })
+                                    onIncrement: { currentValue += 1 },
+                                    onInfo: {})
                     case .textOnly:
                         TextWidgetGuts(text: .constant(""),
                                        date: .constant(Date()),
                                        lastValue: "Lonesome Dove",
                                        lastDate: "\(lastDate)")
                     case .bookCounter:
-                        BookCounterGuts(title: .constant(""),
+                        MediaCounterGuts(title: .constant(""),
                                         author: .constant(""),
                                         startDate: .constant(Date()),
                                         endDate: .constant(Date()),

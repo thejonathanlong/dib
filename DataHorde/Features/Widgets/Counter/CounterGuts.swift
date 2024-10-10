@@ -16,17 +16,14 @@ struct CounterGuts: View {
     let currentValueString: String
     let color: Color
     var date: Binding<Date>
-    let lastValue: String?
-    let lastDate: Date
+    let dailyValue: String?
+    let lastDate: Date?
     let onDecrement: () -> Void
     let onIncrement: () -> Void
+    let onInfo: () -> Void
 
     var body: some View {
         VStack {
-            if let name {
-                Text(name)
-                    .font(.title3)
-            }
             HStack{
                 Button {
                     onDecrement()
@@ -56,8 +53,8 @@ struct CounterGuts: View {
                     Text("Date: ")
                 }
                 .datePickerStyle(.compact)
-                if let lastValue {
-                    Text("**\(lastValue)** at **\(lastDate.formatted(date: .abbreviated, time: .shortened))**")
+                if let dailyValue {
+                    Text("**\(dailyValue)** so far today.")
                         .font(.subheadline)
                 } else {
                     Text("No values recorded yet.")
@@ -74,8 +71,9 @@ struct CounterGuts: View {
                 currentValueString: "100 oz",
                 color: .pinkish,
                 date: .constant(Date()),
-                lastValue: "10 oz",
+                dailyValue: "10 oz",
                 lastDate: Date(),
                 onDecrement: {},
-                onIncrement: {})
+                onIncrement: {},
+                onInfo: {})
 }

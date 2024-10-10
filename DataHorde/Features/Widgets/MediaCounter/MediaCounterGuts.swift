@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BookCounterGuts: View {
+struct MediaCounterGuts: View {
     var title: Binding<String>
     var author: Binding<String>
     var startDate: Binding<Date>
@@ -44,5 +44,5 @@ struct BookCounterGuts: View {
 }
 
 #Preview {
-    BookCounterGuts(title: .constant(""), author: .constant(""), startDate: .constant(Date()), endDate: .constant(Date()), lastValue: "", lastDate: "\(Date())")
+    MediaCounterGuts(title: .constant(""), author: .constant(""), startDate: .constant(Date()), endDate: .constant(Date()), lastValue: "", lastDate: "\(Date())")
 }

@@ -81,7 +81,7 @@ struct TrackedItemModel: AsyncDataStorableModel, Equatable, TrackedItemModelInte
         self.widget = widget
         self.color = color
         self.valueType = valueType
-        self.values = values.sorted(by: { $0.date > $1.date })
+        self.values = values.sorted(by: { $0.date.timeIntervalSince1970 > $1.date.timeIntervalSince1970 })
     }
 
     static func update(managedObject: DBTrackedItem, with model: TrackedItemModel) {
@@ -89,15 +89,7 @@ struct TrackedItemModel: AsyncDataStorableModel, Equatable, TrackedItemModelInte
         managedObject.name = model.name
         managedObject.hexColor = model.color.hex
         if let context = managedObject.managedObjectContext {
-            if managedObject.values == nil {
-                managedObject.values = NSSet()
-            }
-            model
-                .values
-                .compactMap { $0.managedObject(context: context) }
-                .forEach {
-                    managedObject.addToValues($0)
-                }
+            managedObject.values = Set(model.values.compactMap { $0.managedObject(context: context) }) as NSSet
             managedObject.widget = model.widget.managedObject(context: context)
         }
     }

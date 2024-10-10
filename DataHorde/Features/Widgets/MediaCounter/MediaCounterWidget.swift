@@ -8,12 +8,12 @@
 import ComposableArchitecture
 import SwiftUI
 
-struct BookCounterWidget: View {
-    @Bindable var store: StoreOf<BookCounterWidgetFeature>
+struct MediaCounterWidget: View {
+    @Bindable var store: StoreOf<MediaCounterWidgetFeature>
 
     var body: some View {
-        BookCounterGuts(title: $store.title.sending(\.titleChanged),
-                        author: $store.author.sending(\.authorChanged),
+        MediaCounterGuts(title: $store.title.sending(\.titleChanged),
+                        author: $store.creator.sending(\.creatorChanged),
                         startDate: $store.startDate.sending(\.startDateChanged),
                         endDate: $store.endDate.sending(\.endDateChanged),
                         lastValue: store.state.lastValue,
